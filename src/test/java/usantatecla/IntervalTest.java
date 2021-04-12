@@ -6,10 +6,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+
 public class IntervalTest {
-  
+
   private Point left = new Point(-2.2);
+  private Point moreLeft = new Point(-3.3);
   private Point right = new Point(4.4);
+  private Point moreRight = new Point(5.5);
   private IntervalBuilder intervalBuilder;
 
   @BeforeEach
@@ -64,6 +67,20 @@ public class IntervalTest {
     assertTrue(interval.include(right.getLess()));
     assertTrue(interval.include(right.getEquals()));
     assertFalse(interval.include(right.getGreater()));
+  }
+
+  @Test
+  public void getIntersectionOfIntervalOpenOpenAndIntervalOpenOpen() {
+    Interval intersection = this.intervalBuilder.open(left.getEquals()).open(right.getEquals()).build()
+            .getIntersection(
+                    this.intervalBuilder.open(moreLeft.getEquals()).open(moreRight.getEquals()).build()
+            );
+    assertFalse(intersection.include(left.getEquals()));
+    assertTrue(intersection.include(left.getGreater()));
+    assertFalse(intersection.include(moreLeft.getGreater()));
+    assertFalse(intersection.include(right.getEquals()));
+    assertTrue(intersection.include(right.getLess()));
+    assertFalse(intersection.include(moreRight.getLess()));
   }
 
 }
