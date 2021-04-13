@@ -1,6 +1,6 @@
 package usantatecla;
 
-public class Min {
+public class Min extends Comparator{
 
   protected double value;
 

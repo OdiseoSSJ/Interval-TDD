@@ -1,6 +1,6 @@
 package usantatecla;
 
-public class Max {
+public class Max extends Comparator{
 
   protected double value;
 

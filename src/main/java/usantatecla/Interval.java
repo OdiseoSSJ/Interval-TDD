@@ -22,7 +22,7 @@ public class Interval {
 		} else if(interval.isContained(this)){
 			return interval;
 		}
-		else if(this.max.value >= interval.min.value){
+		else if(isThisMaxGreaterThanIntervalMin(interval)){
 			return new Interval(interval.min, this.max);
 		}
 		else
@@ -31,6 +31,10 @@ public class Interval {
 
 	private boolean isContained(Interval interval){
 		return interval.min.isWithin(this.min) && interval.max.isWithin(this.max);
+	}
+
+	private boolean isThisMaxGreaterThanIntervalMin(Interval interval){
+		return Comparator.isMaxGreaterOrEqualThanMin(this.max, interval.min);
 	}
 
 	@Override
