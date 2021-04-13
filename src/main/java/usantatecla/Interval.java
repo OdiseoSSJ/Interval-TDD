@@ -16,12 +16,15 @@ public class Interval {
 	}
 
 	public Interval getIntersection(Interval interval){
-		Interval intersectionEmpty = new Interval(new Min(0), new Max(0));
-		//interval E this
-		if (this.min.value > interval.min.value && this.max.value < interval.max.value) {
+		Interval emptyIntersection = new Interval(new Min(0), new Max(0));
+		if (this.isContained(interval)) {
 			return this;
 		} else
-			return intersectionEmpty;
+			return emptyIntersection;
+	}
+
+	private boolean isContained(Interval interval){
+		return interval.min.isWithin(this.min) && interval.max.isWithin(this.max);
 	}
 
 	@Override

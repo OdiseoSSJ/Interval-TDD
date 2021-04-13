@@ -8,9 +8,11 @@ public class Min {
     this.value = value;
   }
 
-	public boolean isWithin(double value) {
+  public boolean isWithin(double value) {
       return this.value < value;
   }
+
+  public boolean isWithin(Min min) {return this.value < min.value;}
 
   @Override
   public int hashCode() {
