@@ -99,4 +99,18 @@ public class IntervalTest {
     assertFalse(intersection.include(moreRight.getLess()));
   }
 
+  @Test
+  public void getIntersectionOfThisMaxGreaterThanIntervalMin() {
+    Interval intersection = this.intervalBuilder.open(moreLeft.getEquals()).closed(right.getEquals()).build()
+            .getIntersection(
+                    new IntervalBuilder().closed(left.getEquals()).open(moreRight.getEquals()).build()
+            );
+    assertTrue(intersection.include(left.getEquals()));
+    assertTrue(intersection.include(left.getGreater()));
+    assertFalse(intersection.include(moreLeft.getGreater()));
+    assertTrue(intersection.include(right.getEquals()));
+    assertTrue(intersection.include(right.getLess()));
+    assertFalse(intersection.include(moreRight.getLess()));
+  }
+
 }
