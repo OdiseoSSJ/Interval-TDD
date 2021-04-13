@@ -22,8 +22,13 @@ public class Interval {
 		} else if(interval.isContained(this)){
 			return interval;
 		}
-		else if(isThisMaxGreaterThanIntervalMin(interval)){
+		else if(isThisMaxGreaterThanIntervalMin(interval) &&
+				this.min.value < interval.min.value &&
+				this.max.value < interval.max.value){
 			return new Interval(interval.min, this.max);
+		}
+		else if(interval.max.value >= this.min.value){
+			return new Interval(this.min, interval.max);
 		}
 		else
 			return emptyIntersection;
