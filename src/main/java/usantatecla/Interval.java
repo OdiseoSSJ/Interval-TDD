@@ -19,7 +19,10 @@ public class Interval {
 		Interval emptyIntersection = new Interval(new Min(0), new Max(0));
 		if (this.isContained(interval)) {
 			return this;
-		} else
+		} else if(this.min.value < interval.min.value && this.max.value > interval.max.value){
+			return interval;
+		}
+		else
 			return emptyIntersection;
 	}
 
