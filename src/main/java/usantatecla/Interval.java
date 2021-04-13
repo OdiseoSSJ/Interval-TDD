@@ -22,12 +22,12 @@ public class Interval {
 		} else if(interval.isContained(this)){
 			return interval;
 		}
-		else if(isThisMaxGreaterThanIntervalMin(interval) &&
-				this.min.value < interval.min.value &&
-				this.max.value < interval.max.value){
+		else if(isThisMaxGreaterOrEqualThanIntervalMin(interval) &&
+				this.min.isWithin(interval.min) &&
+				interval.max.isWithin(this.max)){
 			return new Interval(interval.min, this.max);
 		}
-		else if(interval.max.value >= this.min.value){
+		else if(isIntervalMaxGreaterOrEqualThanThisMin(interval)){
 			return new Interval(this.min, interval.max);
 		}
 		else
@@ -38,8 +38,12 @@ public class Interval {
 		return interval.min.isWithin(this.min) && interval.max.isWithin(this.max);
 	}
 
-	private boolean isThisMaxGreaterThanIntervalMin(Interval interval){
+	private boolean isThisMaxGreaterOrEqualThanIntervalMin(Interval interval){
 		return Comparator.isMaxGreaterOrEqualThanMin(this.max, interval.min);
+	}
+
+	private boolean isIntervalMaxGreaterOrEqualThanThisMin(Interval interval){
+		return Comparator.isMaxGreaterOrEqualThanMin(interval.max, this.min);
 	}
 
 	@Override
