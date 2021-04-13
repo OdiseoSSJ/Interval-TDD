@@ -85,4 +85,18 @@ public class IntervalTest {
     assertFalse(intersection.include(moreRight.getLess()));
   }
 
+  @Test
+  public void getIntersectionOfThisContainsInterval() {
+    Interval intersection = this.intervalBuilder.open(moreLeft.getEquals()).open(moreRight.getEquals()).build()
+            .getIntersection(
+                    new IntervalBuilder().closed(left.getEquals()).closed(right.getEquals()).build()
+            );
+    assertTrue(intersection.include(left.getEquals()));
+    assertTrue(intersection.include(left.getGreater()));
+    assertFalse(intersection.include(moreLeft.getGreater()));
+    assertTrue(intersection.include(right.getEquals()));
+    assertTrue(intersection.include(right.getLess()));
+    assertFalse(intersection.include(moreRight.getLess()));
+  }
+
 }
