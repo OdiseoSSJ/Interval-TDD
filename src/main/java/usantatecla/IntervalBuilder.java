@@ -13,7 +13,7 @@ public class IntervalBuilder {
   }
 
 	public IntervalBuilder open(double value) {
-    assert !this.minConfigured || !this.maxConfigured;;
+    assert !this.minConfigured || !this.maxConfigured;
     if (!this.minConfigured){
       this.min = new Min(value);
       this.minConfigured = true;

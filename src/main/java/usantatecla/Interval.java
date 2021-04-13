@@ -15,6 +15,15 @@ public class Interval {
 			return this.min.isWithin(value) && this.max.isWithin(value);
 	}
 
+	public Interval getIntersection(Interval interval){
+		Interval intersectionEmpty = new Interval(new Min(0), new Max(0));
+		//interval E this
+		if (this.min.value > interval.min.value && this.max.value < interval.max.value) {
+			return this;
+		} else
+			return intersectionEmpty;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

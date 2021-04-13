@@ -18,7 +18,9 @@ public class IntervalTest {
   @BeforeEach
   public void before(){
     this.left = new Point(-2.2);
+    this.moreLeft = new Point(-3.3);
     this.right = new Point(4.4);
+    this.moreRight = new Point(5.5);
     this.intervalBuilder = new IntervalBuilder();
   }
 
@@ -70,10 +72,10 @@ public class IntervalTest {
   }
 
   @Test
-  public void getIntersectionOfIntervalOpenOpenAndIntervalOpenOpen() {
+  public void getIntersectionOfIntervalContainsThis() {
     Interval intersection = this.intervalBuilder.open(left.getEquals()).open(right.getEquals()).build()
             .getIntersection(
-                    this.intervalBuilder.open(moreLeft.getEquals()).open(moreRight.getEquals()).build()
+                    new IntervalBuilder().open(moreLeft.getEquals()).open(moreRight.getEquals()).build()
             );
     assertFalse(intersection.include(left.getEquals()));
     assertTrue(intersection.include(left.getGreater()));
